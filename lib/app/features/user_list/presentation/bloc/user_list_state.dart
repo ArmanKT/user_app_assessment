@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:user_app_assessment/app/features/home/data/models/user_model.dart';
+import 'package:user_app_assessment/app/features/user_list/data/models/user_model.dart';
 
 abstract class UserListState extends Equatable {
   const UserListState();

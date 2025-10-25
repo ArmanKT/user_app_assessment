@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:user_app_assessment/app/core/exceptions/exceptions.dart';
 import 'package:user_app_assessment/app/core/network/api_client.dart';
 import 'package:user_app_assessment/app/core/utils/utils_exporter.dart';
-import 'package:user_app_assessment/app/features/home/data/models/users_list_response_model.dart';
+import 'package:user_app_assessment/app/features/user_list/data/models/users_list_response_model.dart';
 
 abstract class UsersListRemoteDataSource {
   Future<UserListResponseModel> getUsers({required int page, required int limit});

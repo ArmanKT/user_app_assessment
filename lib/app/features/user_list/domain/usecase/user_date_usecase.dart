@@ -1,5 +1,5 @@
-import 'package:user_app_assessment/app/features/home/data/models/users_list_response_model.dart';
-import 'package:user_app_assessment/app/features/home/domain/repositories/user_repository.dart';
+import 'package:user_app_assessment/app/features/user_list/data/models/users_list_response_model.dart';
+import 'package:user_app_assessment/app/features/user_list/domain/repositories/user_repository.dart';
 
 class UserDateUseCase {
   final UserRepository userRepository;

@@ -1,10 +1,10 @@
 import 'package:get_it/get_it.dart';
 import 'package:user_app_assessment/app/core/network/api_client.dart';
-import 'package:user_app_assessment/app/features/home/data/datasources/users_list_remote_data_source.dart';
-import 'package:user_app_assessment/app/features/home/data/repositories/user_repository_impl.dart';
-import 'package:user_app_assessment/app/features/home/domain/repositories/user_repository.dart';
-import 'package:user_app_assessment/app/features/home/domain/usecase/user_date_usecase.dart';
-import 'package:user_app_assessment/app/features/home/presentation/bloc/user_list_bloc.dart';
+import 'package:user_app_assessment/app/features/user_list/data/datasources/users_list_remote_data_source.dart';
+import 'package:user_app_assessment/app/features/user_list/data/repositories/user_repository_impl.dart';
+import 'package:user_app_assessment/app/features/user_list/domain/repositories/user_repository.dart';
+import 'package:user_app_assessment/app/features/user_list/domain/usecase/user_date_usecase.dart';
+import 'package:user_app_assessment/app/features/user_list/presentation/bloc/user_list_bloc.dart';
 import 'package:user_app_assessment/app/features/splash/presentation/cubit/splash_cubit.dart';
 
 /// Global instance of GetIt

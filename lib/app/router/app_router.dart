@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:user_app_assessment/app/features/home/presentation/screens/home_screen.dart';
+import 'package:user_app_assessment/app/features/user_list/data/models/user_model.dart';
+import 'package:user_app_assessment/app/features/user_list/presentation/screens/user_list_screen.dart';
+import 'package:user_app_assessment/app/features/user_list/presentation/screens/user_details_screen.dart';
 import 'package:user_app_assessment/app/features/splash/presentation/splash_screen.dart';
 import 'route_helper.dart';
 
@@ -17,9 +19,18 @@ class AppRouter {
               builder: (context, state) => const SplashScreen(),
             ),
             GoRoute(
-              path: RouteHelper.homeScreen,
-              name: RouteHelper.homeScreen,
-              builder: (context, state) => HomeScreen(),
+              path: RouteHelper.userListScreen,
+              name: RouteHelper.userListScreen,
+              builder: (context, state) => UserListScreen(),
+            ),
+            GoRoute(
+              path: RouteHelper.userDetailsScreen,
+              name: RouteHelper.userDetailsScreen,
+              builder: (context, state) {
+                // Get the UserModel from extra
+                final user = state.extra as UserModel;
+                return UserDetailPage(user: user);
+              },
             ),
           ],
         );

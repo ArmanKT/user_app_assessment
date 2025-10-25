@@ -5,7 +5,6 @@ import 'package:skeletonizer/skeletonizer.dart';
 import 'package:user_app_assessment/app/components/image/random_color_avatar.dart';
 import '../../core/utils/utils_exporter.dart';
 
-
 class MyNetworkImageWidget extends StatelessWidget {
   final String imageUrl;
   final String? imageAlt;
@@ -24,7 +23,7 @@ class MyNetworkImageWidget extends StatelessWidget {
     this.imageAlt,
     this.height = 100,
     this.width = 100,
-    this.radius = 5,
+    this.radius = Dimensions.radiusSmall,
     this.boxFit = BoxFit.cover,
     this.isProfile = false,
     this.customErrorWidget,
@@ -53,9 +52,7 @@ class MyNetworkImageWidget extends StatelessWidget {
           image: DecorationImage(
             image: imageProvider,
             fit: boxFit,
-            colorFilter: color != null
-                ? ColorFilter.mode(color!, BlendMode.srcIn)
-                : null,
+            colorFilter: color != null ? ColorFilter.mode(color!, BlendMode.srcIn) : null,
           ),
         ),
       ),
@@ -73,7 +70,7 @@ class MyNetworkImageWidget extends StatelessWidget {
         child: Center(
           child: SpinKitFadingCube(
             color: AppColors.primary.withValues(alpha: 0.3),
-            size: Dimensions.avatarSmall,
+            size: Dimensions.iconLarge,
           ),
         ),
       ),

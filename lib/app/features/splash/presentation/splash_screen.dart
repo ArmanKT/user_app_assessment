@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen>
       listener: (context, finished) {
         if (finished) {
           // Navigate to HomeScreen using GoRouter
-          context.go(RouteHelper.homeScreen);
+          context.go(RouteHelper.userListScreen);
         }
       },
       child: Scaffold(

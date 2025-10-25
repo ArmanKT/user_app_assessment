@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:user_app_assessment/app/features/home/data/models/user_model.dart';
+import 'package:user_app_assessment/app/features/user_list/data/models/user_model.dart';
 
 UserListResponseModel userListResponseModelFromJson(String str) => UserListResponseModel.fromJson(json.decode(str));
 

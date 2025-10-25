@@ -26,4 +26,6 @@ class UserModel extends User {
         'email': email,
         'avatar': avatar,
       };
+      
+  String get fullName => '${firstName.trim()} ${lastName.trim()}'.trim();
 }

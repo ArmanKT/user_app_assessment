@@ -8,9 +8,15 @@ class Dimensions {
 
   // Border Radius
   static const double radiusSmall = 6.0;
-  static const double radius = 10.0;
+  static const double radiusMedium = 8.0;
+  static const double radius = 12.0;
   static const double radiusLarge = 16.0;
   static const double radiusExtraLarge = 24.0;
+  static const double radiusMax = 100.0;
+
+  //Border
+  static const double borderStock = 1.0;
+  static const double borderStock2 = 2.0;
 
   // Elevation / Shadow
   static const double elevationLow = 2.0;
@@ -36,5 +42,5 @@ class Dimensions {
   static const double avatarSmall = 40.0;
   static const double avatar = 56.0;
   static const double avatarLarge = 72.0;
-
+  static const double avatarHuge = 150.0;
 }
