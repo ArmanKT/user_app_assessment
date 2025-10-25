@@ -6,7 +6,7 @@ import 'package:user_app_assessment/environment.dart';
 class ApiClient {
   final Dio _dio;
 
-  ApiClient({String baseUrl = UrlContainer.domainUrl}) : _dio = Dio() {
+  ApiClient({String baseUrl = UrlContainer.baseUrl}) : _dio = Dio() {
     _dio.options = BaseOptions(
       baseUrl: baseUrl,
       connectTimeout: const Duration(seconds: 30),

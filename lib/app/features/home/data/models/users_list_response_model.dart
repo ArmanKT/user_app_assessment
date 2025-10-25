@@ -40,4 +40,6 @@ class UserListResponseModel {
         "total_pages": totalPages,
         "data": List<dynamic>.from(data.map((x) => x.toJson())),
       };
+
+  bool get hasNextPage => page < totalPages;
 }

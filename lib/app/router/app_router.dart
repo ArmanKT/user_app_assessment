@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:user_app_assessment/app/features/home/presentation/home_screen.dart';
+import 'package:user_app_assessment/app/features/home/presentation/screens/home_screen.dart';
 import 'package:user_app_assessment/app/features/splash/presentation/splash_screen.dart';
 import 'route_helper.dart';
 
