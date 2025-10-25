@@ -18,7 +18,6 @@ Goals
 
 | Screen 4 | Screen 5 | Screen 6 |
 |----------|----------|----------|
-|----------|----------|
 | ![Screen1](demo/screenshots/Screenshot_4.png) | ![Screen2](demo/screenshots/Screenshot_5.png) | ![Screen3](demo/screenshots/Screenshot_6.png) |
 
 
