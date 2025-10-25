@@ -10,6 +10,29 @@ Goals
 - Cache results locally and handle offline/online states
 
 
+## 📱 Screenshots
+
+| Screen 1 | Screen 2 | Screen 3 |
+|----------|----------|----------|
+| ![Screen1](demo/screenshots/Screenshot_1.png) | ![Screen2](demo/screenshots/Screenshot_2.png) | ![Screen3](demo/screenshots/Screenshot_3.png) |
+
+| Screen 4 | Screen 5 |
+|----------|----------|
+| ![Screen1](demo/screenshots/Screenshot_4.png) | ![Screen2](demo/screenshots/Screenshot_5.png) |
+
+
+---
+
+## 📥 Download APK
+
+[![Download APK](https://img.shields.io/badge/Download-APK-blue?style=for-the-badge&logo=android)](demo/apk/app-release.apk)
+
+---
+
+## 🎬 Demo Video
+
+
+
 ## 🎯 Architecture Overview
 
 The application follows a clean architecture pattern with clear separation of concerns:
@@ -50,7 +73,6 @@ The application follows a clean architecture pattern with clear separation of co
 - **Local Storage**: hive_ce (v2.15.1)
 - **Image Handling**: 
   - cached_network_image (v3.4.1)
-  - flutter_svg (v2.2.1)
 - **UI Components**:
   - flutter_spinkit (v5.2.2)
   - skeletonizer (v2.1.0)
@@ -184,3 +206,5 @@ flutter test
 
 - **ArmanKT**
   - GitHub: [@ArmanKT](https://github.com/ArmanKT)
+
+
