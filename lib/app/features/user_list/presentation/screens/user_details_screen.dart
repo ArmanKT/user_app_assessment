@@ -123,7 +123,7 @@ class UserDetailPage extends StatelessWidget {
                     _buildInfoTile(
                       icon: Icons.person,
                       title: AppStrings.firstName,
-                      value: user.fullName,
+                      value: user.firstName,
                       context: context,
                     ),
                     const SizedBox(height: Dimensions.padding),
