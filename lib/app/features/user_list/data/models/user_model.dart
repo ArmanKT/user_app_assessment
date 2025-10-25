@@ -1,23 +1,43 @@
+import 'package:hive_ce_flutter/hive_flutter.dart';
+
 import '../../domain/entities/user.dart';
 
-class UserModel extends User {
+part 'user_model.g.dart';
+
+@HiveType(typeId: 0)
+class UserModel {
+  @HiveField(0)
+  final int id;
+
+  @HiveField(1)
+  final String firstName;
+
+  @HiveField(2)
+  final String lastName;
+
+  @HiveField(3)
+  final String email;
+
+  @HiveField(4)
+  final String avatar;
+
   UserModel({
-    required super.id,
-    required super.firstName,
-    required super.lastName,
-    required super.email,
-    required super.avatar,
+    required this.id,
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.avatar,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
-    return UserModel(
-      id: json['id'],
-      firstName: json['first_name'] ?? '',
-      lastName: json['last_name'] ?? '',
-      email: json['email'] ?? '',
-      avatar: json['avatar'] ?? '',
-    );
-  }
+  String get fullName => '${firstName.trim()} ${lastName.trim()}'.trim();
+
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+        id: json['id'],
+        firstName: json['first_name'] ?? '',
+        lastName: json['last_name'] ?? '',
+        email: json['email'] ?? '',
+        avatar: json['avatar'] ?? '',
+      );
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -26,6 +46,13 @@ class UserModel extends User {
         'email': email,
         'avatar': avatar,
       };
-      
-  String get fullName => '${firstName.trim()} ${lastName.trim()}'.trim();
+
+  // convert to user entity
+  User toEntity() => User(
+        id: id,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        avatar: avatar,
+      );
 }

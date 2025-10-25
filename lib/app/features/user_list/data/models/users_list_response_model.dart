@@ -11,25 +11,25 @@ UserListResponseModel userListResponseModelFromJson(String str) => UserListRespo
 String userListResponseModelToJson(UserListResponseModel data) => json.encode(data.toJson());
 
 class UserListResponseModel {
-  int page;
-  int perPage;
-  int total;
-  int totalPages;
+  int? page;
+  int? perPage;
+  int? total;
+  int? totalPages;
   List<UserModel> data;
 
   UserListResponseModel({
-    required this.page,
-    required this.perPage,
-    required this.total,
-    required this.totalPages,
+    this.page,
+    this.perPage,
+    this.total,
+    this.totalPages,
     required this.data,
   });
 
   factory UserListResponseModel.fromJson(Map<String, dynamic> json) => UserListResponseModel(
-        page: json["page"],
-        perPage: json["per_page"],
-        total: json["total"],
-        totalPages: json["total_pages"],
+        page: json["page"] ?? 0,
+        perPage: json["per_page"] ?? 0,
+        total: json["total"] ?? 0,
+        totalPages: json["total_pages"] ?? 0,
         data: List<UserModel>.from(json["data"].map((x) => UserModel.fromJson(x))),
       );
 
@@ -41,5 +41,5 @@ class UserListResponseModel {
         "data": List<dynamic>.from(data.map((x) => x.toJson())),
       };
 
-  bool get hasNextPage => page < totalPages;
+  bool get hasNextPage => (page ?? 0) < (totalPages ?? 0);
 }

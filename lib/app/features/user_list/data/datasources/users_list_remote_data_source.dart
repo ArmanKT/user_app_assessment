@@ -18,14 +18,13 @@ class UsersListRemoteDataSourceImpl implements UsersListRemoteDataSource {
   Future<UserListResponseModel> getUsers({required int page, required int limit}) async {
     try {
       final response = await apiClient.get(UrlContainer.users, queryParameters: {'page': page, 'per_page': limit});
-
-      if (response.statusCode == 200) {
+      if (response.success == true) {
         return userListResponseModelFromJson(jsonEncode(response.data));
       } else {
-        throw ServerException(AppStrings.fetchError);
+        throw ServerException(response.error);
       }
     } catch (e) {
-      throw ServerException(AppStrings.fetchError);
+      throw ServerException(e.toString());
     }
   }
 }
