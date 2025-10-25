@@ -30,8 +30,7 @@ Goals
 ---
 
 ## 🎬 Demo Video
-
-
+https://github.com/user-attachments/assets/792033f5-4646-4354-a9a1-921039d6f29e
 
 ## 🎯 Architecture Overview
 
