@@ -6,7 +6,7 @@ import 'package:user_app_assessment/app/features/user_list/data/datasources/user
 import 'package:user_app_assessment/app/features/user_list/data/datasources/users_list_remote_data_source.dart';
 import 'package:user_app_assessment/app/features/user_list/data/repositories/user_repository_impl.dart';
 import 'package:user_app_assessment/app/features/user_list/domain/repositories/user_repository.dart';
-import 'package:user_app_assessment/app/features/user_list/domain/usecase/user_date_usecase.dart';
+import 'package:user_app_assessment/app/features/user_list/domain/usecases/user_date_usecase.dart';
 import 'package:user_app_assessment/app/features/user_list/presentation/bloc/user_list_bloc.dart';
 import 'package:user_app_assessment/app/features/splash/presentation/cubit/splash_cubit.dart';
 

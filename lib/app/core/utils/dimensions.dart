@@ -42,5 +42,5 @@ class Dimensions {
   static const double avatarSmall = 40.0;
   static const double avatar = 56.0;
   static const double avatarLarge = 72.0;
-  static const double avatarHuge = 150.0;
+  static const double avatarHuge = 130.0;
 }

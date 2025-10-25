@@ -36,19 +36,6 @@ class ApiClient {
     }
   }
 
-  /// POST method
-  Future<ApiResponse> post(String path, {dynamic data}) async {
-    try {
-      final response = await _dio.post(path, data: data);
-      return ApiResponse.success(response.data, statusCode: response.statusCode);
-    } on DioException catch (e) {
-      final errorMessage = _handleError(e);
-      return ApiResponse.failure(errorMessage, statusCode: e.response?.statusCode);
-    } catch (e) {
-      return ApiResponse.failure("⚠️ Unexpected error: $e");
-    }
-  }
-
   /// Handle DioException and return proper error message
   String _handleError(DioException e) {
     String errorMessage;

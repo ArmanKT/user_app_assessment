@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:user_app_assessment/app/core/di/service_locator.dart';
 import 'package:user_app_assessment/app/core/utils/utils_exporter.dart';
 import 'package:user_app_assessment/app/features/user_list/presentation/bloc/user_list_bloc.dart';
 import 'package:user_app_assessment/app/features/user_list/presentation/bloc/user_list_event.dart';
 import 'package:user_app_assessment/app/features/user_list/presentation/bloc/user_list_state.dart';
-import 'package:user_app_assessment/app/features/user_list/presentation/screens/widgets/user_list_info_card.dart';
-import 'package:user_app_assessment/app/router/route_helper.dart';
-
-import 'widgets/user_list_shimmer.dart';
+import 'package:user_app_assessment/app/features/user_list/presentation/screens/widgets/search_box_widget.dart';
+import 'widgets/users_listview_widget.dart';
 
 class UserListScreen extends StatefulWidget {
   const UserListScreen({super.key});
@@ -21,11 +17,11 @@ class UserListScreen extends StatefulWidget {
 class _UserListScreenState extends State<UserListScreen> {
   late final UserListBloc _userListBloc;
   final ScrollController _scrollController = ScrollController();
-  String _searchQuery = '';
+  final TextEditingController _searchBoxController = TextEditingController();
 
   void scrollListener() {
     if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
-      if (_userListBloc.state is UserListLoaded && (_userListBloc.state as UserListLoaded).hasNextPage && _searchQuery.isEmpty) {
+      if (_userListBloc.state is UserListLoaded && (_userListBloc.state as UserListLoaded).hasNextPage && _searchBoxController.text.isEmpty) {
         // Only fetch more if not searching
         _userListBloc.add(const FetchUserListEvent());
       }
@@ -42,11 +38,17 @@ class _UserListScreenState extends State<UserListScreen> {
 
     // Listen for scroll end to load more
     _scrollController.addListener(scrollListener);
+
+    // Listen to search changes
+    _searchBoxController.addListener(() {
+      _userListBloc.add(SearchUserListEvent(_searchBoxController.text));
+    });
   }
 
   @override
   void dispose() {
     _scrollController.dispose();
+    _searchBoxController.dispose();
     _userListBloc.close();
     super.dispose();
   }
@@ -58,80 +60,15 @@ class _UserListScreenState extends State<UserListScreen> {
       body: Column(
         children: [
           // Search Bar
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: AppStrings.searchHint,
-                prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                isDense: true,
-              ),
-              onChanged: (value) {
-                setState(() {
-                  _searchQuery = value;
-                });
-                _userListBloc.add(SearchUserListEvent(value));
-              },
-            ),
+          SearchBoxWidget(
+            searchBoxController: _searchBoxController,
           ),
           // Expanded list
           Expanded(
-            child: BlocConsumer<UserListBloc, UserListState>(
-              bloc: _userListBloc,
-              listener: (context, state) {},
-              builder: (context, state) {
-                if (state is UserListLoading) {
-                  return const UserListShimmer(itemCount: 10);
-                }
-
-                if (state is UserListError) {
-                  return Center(
-                    child: Text('❌ ${state.message}', style: const TextStyle(color: Colors.red)),
-                  );
-                }
-
-                if (state is UserListNoMoreData) {
-                  return const Center(child: Text('No users found'));
-                }
-
-                if (state is UserListLoaded) {
-                  if (state.users.isEmpty) {
-                    return const Center(child: Text('No users available'));
-                  }
-
-                  return RefreshIndicator(
-                    onRefresh: () async {
-                      _userListBloc.add(const RefreshUserListEvent());
-                    },
-                    child: ListView.separated(
-                      controller: _scrollController,
-                      itemCount: state.users.length + 1,
-                      separatorBuilder: (context, index) => SizedBox(height: 0),
-                      itemBuilder: (context, index) {
-                        if (index == state.users.length) {
-                          return state.hasNextPage && _searchQuery.isEmpty
-                              ? const UserListShimmer(
-                                  scrollPhysics: NeverScrollableScrollPhysics(),
-                                  itemCount: 1,
-                                )
-                              : const SizedBox.shrink();
-                        }
-
-                        final user = state.users[index];
-                        return UseListInfoCard(
-                          user: user,
-                          onTap: () {
-                            context.pushNamed(RouteHelper.userDetailsScreen, extra: user);
-                          },
-                        );
-                      },
-                    ),
-                  );
-                }
-
-                return const SizedBox.shrink();
-              },
+            child: UsersListWidget(
+              userListBloc: _userListBloc,
+              scrollController: _scrollController,
+              searchQuery: _searchBoxController.text,
             ),
           ),
         ],

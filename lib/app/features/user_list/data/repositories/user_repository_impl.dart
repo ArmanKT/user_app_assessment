@@ -1,4 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:user_app_assessment/app/core/exceptions/exceptions.dart';
 import 'package:user_app_assessment/app/core/utils/utils_exporter.dart';
 import 'package:user_app_assessment/app/features/user_list/data/datasources/users_list_local_data_source.dart';
 import 'package:user_app_assessment/app/features/user_list/data/datasources/users_list_remote_data_source.dart';
@@ -39,7 +40,7 @@ class UserRepositoryImpl implements UserRepository {
       if (cachedUsers.isNotEmpty) {
         return UserListResponseModel(data: cachedUsers);
       } else {
-        throw Exception(AppStrings.noInternet);
+        throw ServerException(AppStrings.noInternet);
       }
     }
   }

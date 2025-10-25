@@ -32,13 +32,15 @@ class UserCardShimmer extends StatelessWidget {
 class UserListShimmer extends StatelessWidget {
   final int itemCount;
   final ScrollPhysics? scrollPhysics;
-  const UserListShimmer({super.key, this.itemCount = 10, this.scrollPhysics});
+  final EdgeInsetsGeometry? padding;
+  const UserListShimmer({super.key, this.itemCount = 10, this.scrollPhysics, this.padding});
 
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
       shrinkWrap: true,
       physics: scrollPhysics,
+      padding: padding ?? EdgeInsets.symmetric(vertical: Dimensions.padding),
       itemCount: itemCount,
       separatorBuilder: (context, index) => SizedBox(height: Dimensions.paddingExtraSmall),
       itemBuilder: (context, index) {

@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:user_app_assessment/app/features/user_list/data/models/user_model.dart';
-import 'package:user_app_assessment/app/features/user_list/domain/usecase/user_date_usecase.dart';
+import 'package:user_app_assessment/app/features/user_list/domain/usecases/user_date_usecase.dart';
+import 'package:user_app_assessment/environment.dart';
 
 import 'user_list_event.dart';
 import 'user_list_state.dart';
@@ -15,7 +16,7 @@ class UserListBloc extends Bloc<UserListEvent, UserListState> {
   }
 
   int _page = 1;
-  final int _limit = 10;
+  final int _limit = Environment.LIMIT_PER_PAGE;
   bool _hasNextPage = true;
   final List<UserModel> _usersList = [];
 
@@ -72,20 +73,23 @@ class UserListBloc extends Bloc<UserListEvent, UserListState> {
     SearchUserListEvent event,
     Emitter<UserListState> emit,
   ) async {
-    final query = event.query.toLowerCase().trim();
+    final rawQuery = event.query.trim().toLowerCase();
+    final query = rawQuery.replaceAll(RegExp(r'\s+'), ' ');
 
     if (query.isEmpty) {
-      // If search is empty, show the full list
       emit(UserListLoaded(users: _usersList, hasNextPage: _hasNextPage));
-    } else {
-      // Filter local list
-      final filteredUsers = _usersList.where((user) {
-        final fullName = user.fullName.toLowerCase();
-        final email = user.email.toLowerCase();
-        return fullName.contains(query) || email.contains(query);
-      }).toList();
-
-      emit(UserListLoaded(users: filteredUsers, hasNextPage: false));
+      return;
     }
+
+    final sanitizedPattern = RegExp.escape(query);
+    final regex = RegExp(sanitizedPattern, caseSensitive: false);
+
+    final filteredUsers = _usersList.where((user) {
+      final fullName = user.fullName.toLowerCase();
+      final email = user.email.toLowerCase();
+      return regex.hasMatch(fullName) || regex.hasMatch(email);
+    }).toList();
+
+    emit(UserListLoaded(users: filteredUsers, hasNextPage: false));
   }
 }

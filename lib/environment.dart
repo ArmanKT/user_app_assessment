@@ -1,11 +1,11 @@
 class Environment {
   static const appName = "USER LIST APP";
   static const appVersion = "1.0.0";
-  
+
   //Api Keys
   static const API_KEY = "reqres-free-v1"; // Enter Your reqres api key here
+  static const int LIMIT_PER_PAGE = 10; // Pagination limit 
 
-  
   //DEV MODE ==> false if production
   static const bool DEV_MODE = true;
 
